@@ -19,4 +19,10 @@ public class Window implements  Zoomable{
     public void zoom(Point center, double factor) {
 
     }
+
+    public Complex toComplex(Point p){
+        double reel = minReal + p.x * (maxReal-minReal) / (imageWidth-1);
+        double imag = minImaginary + p.y * (minImaginary-maxImaginary) / (imageHeight-1);
+        return new Complex(reel, imag);
+    }
 }
