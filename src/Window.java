@@ -5,6 +5,16 @@ public class Window implements  Zoomable{
     private double maxReal;
     private double minImaginary;
     private double maxImaginary;
+
+    public Window(ImagePanel img, double reelMin, double imagMin, double reelMax, double imagMax){
+        this.imageWidth = img.getWidth();
+        this.imageHeight = img.getHeight();
+        this.minReal = reelMin;
+        this.maxReal = reelMax;
+        this.minImaginary = imagMin;
+        this.maxImaginary = imagMax;
+    }
+
     @Override
     public int height() {
         return this.imageHeight;
@@ -22,7 +32,7 @@ public class Window implements  Zoomable{
 
     public Complex toComplex(Point p){
         double reel = minReal + p.x * (maxReal-minReal) / (imageWidth-1);
-        double imag = minImaginary + p.y * (minImaginary-maxImaginary) / (imageHeight-1);
+        double imag = maxImaginary + p.y * (minImaginary-maxImaginary) / (imageHeight-1);
         return new Complex(reel, imag);
     }
 }

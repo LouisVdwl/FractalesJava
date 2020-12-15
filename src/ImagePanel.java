@@ -24,4 +24,6 @@ public class ImagePanel extends JPanel {
         super.paintComponent(graphics);
         graphics.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
     }
+
+
 }
