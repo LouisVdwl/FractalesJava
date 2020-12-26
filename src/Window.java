@@ -1,38 +1,36 @@
-public class Window implements  Zoomable{
-    private int imageWidth;
-    private int imageHeight;
-    private double minReal;
-    private double maxReal;
-    private double minImaginary;
-    private double maxImaginary;
+public class Window implements Zoomable{
 
-    public Window(ImagePanel img, double reelMin, double imagMin, double reelMax, double imagMax){
-        this.imageWidth = img.getWidth();
-        this.imageHeight = img.getHeight();
-        this.minReal = reelMin;
-        this.maxReal = reelMax;
-        this.minImaginary = imagMin;
-        this.maxImaginary = imagMax;
-    }
+    public int imageWidth;
+    public int imageHeight;
+    public double minReal;
+    public double maxReal;
+    public double minImaginary;
+    public double maxImaginary;
 
-    @Override
-    public int height() {
-        return this.imageHeight;
-    }
-
-    @Override
-    public int width() {
-        return this.imageWidth;
-    }
-
-    @Override
-    public void zoom(Point center, double factor) {
-
+    public Window(int imageWidth, int imageHeight, double minReal, double maxReal, double minImaginary, double maxImaginary){
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
+        this.minReal = minReal;
+        this.maxReal = maxReal;
+        this.minImaginary = minImaginary;
+        this.maxImaginary = maxImaginary;
     }
 
     public Complex toComplex(Point p){
-        double reel = minReal + p.x * (maxReal-minReal) / (imageWidth-1);
-        double imag = maxImaginary + p.y * (minImaginary-maxImaginary) / (imageHeight-1);
-        return new Complex(reel, imag);
+        double realPart = this.minReal + p.x * (this.maxReal - this.minReal) / (this.imageWidth - 1);
+        double imaginaryPart = this.minImaginary + p.y * (this.maxImaginary - this.minImaginary) / (this.imageHeight - 1);
+        return new Complex(realPart, imaginaryPart);
+    }
+
+    public int height(){
+        return this.imageHeight;
+    }
+
+    public int width(){
+        return this.imageWidth;
+    }
+
+    public void zoom(Point center, double factor){
+
     }
 }

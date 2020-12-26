@@ -2,30 +2,32 @@ import java.awt.*;
 
 public class Mandelbrot {
     public Mandelbrot(){
-        Complex zn;
         Color noir;
         Color blanc;
 
-        noir = new Color(255, 0, 120);
+        noir = new Color(0, 0, 0);
         blanc = new Color(255,255,255);
-        zn = new Complex(-2.5, 1.75);
 
         ImagePanel img = new ImagePanel(800, 800);
 
-        Window wnd = new Window(img, -2.5, 1.75, 1, -1.75);
+        Window wnd = new Window(img.getImage().getWidth(), img.getImage().getHeight(), -2.5, 1, -1.75, 1.75);
 
-        for(int y = 0; y < 800; y++){
-            for(int x = 0; x < 800; x++){
-                Point pActuel = new Point(x, y);
-                Complex c = wnd.toComplex(pActuel);
-                zn = zn.square().add(c);
-                if(zn.modulus2() < 4){
-                    System.out.println("ok");
-                    img.getImage().setRGB(x, y, noir.getRGB());
-                }else{
-                    img.getImage().setRGB(x, y, blanc.getRGB());
+        for(int i = 0; i < wnd.width(); i++){
+            for(int j = 0; j < wnd.height(); j++){
+                int n = 0;
+                Complex z0 = new Complex(0, 0);
+                Complex c = wnd.toComplex(new Point(i, j));
+                Complex zn = z0;
+                while(n < 255 && zn.modulus2() < 4){
+                    zn = zn.square().add(c);
+                    n++;
                 }
 
+                if(n >= 255){
+                    img.getImage().setRGB(i, j, (0 << 16) + (0 << 8) + 0);
+                }else{
+                    img.getImage().setRGB(i, j, (n << 16) + (n << 8) + n);
+                }
             }
         }
 
