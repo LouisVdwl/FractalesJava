@@ -1,17 +1,17 @@
 import java.awt.*;
 
-public class Mandelbrot {
-    public Mandelbrot(){
+public class ExempleJulia {
+    public ExempleJulia(){
 
         ImagePanel img = new ImagePanel(800, 800);
 
-        Window wnd = new Window(img.getImage().getWidth(), img.getImage().getHeight(), -2.5, 1, -1.75, 1.75);
+        Window wnd = new Window(img.getImage().getWidth(), img.getImage().getHeight(), -2, 2, -2, 2);
 
         for(int i = 0; i < wnd.width(); i++){
             for(int j = 0; j < wnd.height(); j++){
                 int n = 0;
-                Complex z0 = new Complex(0, 0);
-                Complex c = wnd.toComplex(new Point(i, j));
+                Complex z0 = wnd.toComplex(new Point(i, j));
+                Complex c = new Complex(0.289, 0.01);
                 Complex zn = z0;
                 while(n < 255 && zn.modulus2() < 4){
                     zn = zn.square().add(c);
@@ -29,3 +29,4 @@ public class Mandelbrot {
         Fenetre fen = new Fenetre(img);
     }
 }
+
